@@ -34,6 +34,11 @@ And go to [localhost:8080](http://localhost:8080/)
 
 You should be able to see 'Hi there' displayed.
 
+You can change the port for incoming requests very easily, example:
+
+    docker run -p 5000:8080 nataliastanko/node
+
+And go to [localhost:5000](http://localhost:5000/)
 
 ***
 
