@@ -44,7 +44,7 @@ Same with a port inside a container, example:
 
     docker run -p 5000:6000 nataliastanko/node
 
-But after editing index.js (changing the port to 6000), changes are not applies in project direcotory. See for yourself:
+But after editing index.js (changing the port to 6000), changes are not applies in project directory. See for yourself:
 
     docker run -it nataliastanko/node sh
 
@@ -55,6 +55,18 @@ So we have to rebuild and relaunch the container:
 
 You should se ```Listening on port 6000``` printed as a log in running container.
 Go to [localhost:5000](http://localhost:5000/) to see changes.
+
+## Step 3.
+
+Check project directory
+
+    docker run -it nataliastanko/node sh
+
+It is better to place app files somewhere else than root directory ```/```.
+After setting ```WORKDIR```, we have to rebuild and relaunch again.
+
+    docker build -t nataliastanko/node .
+    docker run -p 5000:6000 nataliastanko/node
 
 ***
 
