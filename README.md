@@ -40,6 +40,18 @@ You can change the port for incoming requests very easily, example:
 
 And go to [localhost:5000](http://localhost:5000/)
 
+Same with a port inside a container, example:
+
+    docker run -p 5000:6000 nataliastanko/node
+
+But after editing index.js (changing the port to 6000) we have to rebuild (with tag) and relaunch container:
+
+    docker build -t nataliastanko/node .
+    docker run -p 5000:6000 nataliastanko/node
+
+You should se ```Listening on port 6000``` printed as a log in running container.
+Go to [localhost:5000](http://localhost:5000/) to see changes.
+
 ***
 
 ***
