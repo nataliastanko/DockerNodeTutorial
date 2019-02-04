@@ -44,7 +44,11 @@ Same with a port inside a container, example:
 
     docker run -p 5000:6000 nataliastanko/node
 
-But after editing index.js (changing the port to 6000) we have to rebuild (with tag) and relaunch container:
+But after editing index.js (changing the port to 6000), changes are not applies in project direcotory. See for yourself:
+
+    docker run -it nataliastanko/node sh
+
+So we have to rebuild and relaunch the container:
 
     docker build -t nataliastanko/node .
     docker run -p 5000:6000 nataliastanko/node
