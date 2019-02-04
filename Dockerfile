@@ -6,8 +6,13 @@ FROM node:alpine
 WORKDIR /usr/app
 
 # Install dependencies
-COPY ./ ./
+# Minimizing rebuilds, it will not invalidate the cache
+# npm dependencies first
+COPY ./package.json ./
 RUN npm install
+
+# copy the rest of the project files
+COPY ./ ./
 
 # Default command
 # all the parts of the command
