@@ -1,21 +1,25 @@
-## Docker Node Tutorial
+## Docker NodeJS Tutorial
 
 ## Step 1.
+
+### Node server setup & server code
+
+Create ```package.json``` file.
+Create ```index.js``` file.
+Create ```Dockerfile``` file.
 
 Run
 
     docker build .
 
 Proceed to Step 2. if there are no errors.
-Warnings and notices are OK for now.
+Warnings (npm WARN) and notices (npm notice) are OK for now.
 
 ## Step 2.
 
+Tag the image to not to have to work with IDs.
+
     docker build -t dockerUsername/projectname .
-
-Example
-
-    docker build -t nataliastanko/node .
 
 Then run
 
@@ -23,50 +27,41 @@ Then run
 
 Redirect incoming traffic on local machine via some port to container.
 
-    docker run -p portFromLocalhost:portInsideContainer imageName
+    docker run -p portFromLocalhostWhereWeMapFromIncomingRequests:portInsideTheContainer imageName
+
+dockerUsername/projectname is the imageName.
 
 Example:
 
-    docker run -p 8080:8080 nataliastanko/node
+    docker run -p 3000:6000 dockerUsername/projectname
 
+And go to [localhost:3000](http://localhost:3000/)
 
-And go to [localhost:8080](http://localhost:8080/)
+You should be able to see ```Listening on port 6000 inside the container``` displayed.
 
-You should be able to see 'Hi there' displayed.
+But after editing index.js (changing the listening port to 7000 for example or editing some text displayed), changes are not applied in project directory in the container. See for yourself:
 
-You can change the port for incoming requests very easily, example:
-
-    docker run -p 5000:8080 nataliastanko/node
-
-And go to [localhost:5000](http://localhost:5000/)
-
-Same with a port inside a container, example:
-
-    docker run -p 5000:6000 nataliastanko/node
-
-But after editing index.js (changing the port to 6000), changes are not applies in project directory. See for yourself:
-
-    docker run -it nataliastanko/node sh
+    docker run -it dockerUsername/projectname sh
 
 So we have to rebuild and relaunch the container:
 
-    docker build -t nataliastanko/node .
-    docker run -p 5000:6000 nataliastanko/node
+    docker build -t dockerUsername/projectname .
+    docker run -p 3000:7000 dockerUsername/projectname
 
-You should se ```Listening on port 6000``` printed as a log in running container.
-Go to [localhost:5000](http://localhost:5000/) to see changes.
+You should se ```Listening on port 7000 inside the container``` printed as a log in running container.
+Go to [localhost:3000](http://localhost:3000/) to see changes.
 
 ## Step 3.
 
 Check project directory
 
-    docker run -it nataliastanko/node sh
+    docker run -it dockerUsername/projectname sh
 
 It is better to place app files somewhere else than root directory ```/```.
 After setting ```WORKDIR```, we have to rebuild and relaunch again.
 
-    docker build -t nataliastanko/node .
-    docker run -p 5000:6000 nataliastanko/node
+    docker build -t dockerUsername/projectname .
+    docker run -p 3000:7000 dockerUsername/projectname
 
 ***
 

@@ -5,6 +5,7 @@ FROM node:alpine
 # if dir does not exist, it will be created automatically
 WORKDIR /usr/app
 
+# Minimizing cache busting and unnecessary rebuilds:
 # Install dependencies
 # Minimizing rebuilds, it will not invalidate the cache
 # npm dependencies first
